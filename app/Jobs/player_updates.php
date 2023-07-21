@@ -26,14 +26,22 @@ class player_updates implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle()
     {
+
         $player_request=new BallerAPIRequest('players');
         $request=$player_request->getResponse();
         $datas=$request['data'];
-        $input=[];
         foreach ($datas as $data){
-            $input[]=['ID'=>$data['id']];
+            $input=[
+                'PlayerID'=>$data['id'], 
+                'firstname'=>$data['first_name'], 
+                'lastname'=>$data['last_name'], 
+                'team'=>$data['team']['full_name'],
+                'position'=>$data['position']
+            ];
+            var_dump($input);
+            PlayerIDs::create($input);
         };
     }
 }

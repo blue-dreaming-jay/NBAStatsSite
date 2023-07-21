@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Jobs\player_updates;
+use App\Models\PlayerIDs;
 
 class Kernel extends ConsoleKernel
 {
@@ -12,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->job(new player_updates(new PlayerIDs))->everyTwoHours();
         // $schedule->command('inspire')->hourly();
     }
 
