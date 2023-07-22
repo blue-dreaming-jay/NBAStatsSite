@@ -8,11 +8,10 @@
 Just a test...
 <div>
     <p>
-        another test...
+        
+<a href="players">players</a>
+
     </p>
 </div>
-<?php 
-require_once ("../app/BackendTesting/insert.php");
-?>
 </body>
 </html> 

@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->job(new player_updates(new PlayerIDs))->everyTwoHours();
+        $schedule->job(new player_updates())->daily();
         // $schedule->command('inspire')->hourly();
     }
 

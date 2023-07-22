@@ -18,7 +18,7 @@ class player_updates implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public PlayerIDs $playerids)
+    public function __construct()
     {
 
     }
@@ -40,8 +40,7 @@ class player_updates implements ShouldQueue
                 'team'=>$data['team']['full_name'],
                 'position'=>$data['position']
             ];
-            var_dump($input);
-            PlayerIDs::create($input);
+            PlayerIDs::updateOrCreate($input);
         };
     }
 }
