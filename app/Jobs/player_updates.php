@@ -18,20 +18,17 @@ class player_updates implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct()
-    {
-
-    }
+    
 
     /**
      * Execute the job.
      */
-    public function handle()
-    {
+    public static function update($page){
 
-        $player_request=new BallerAPIRequest('players');
+        $player_request=new BallerAPIRequest("players?page={$page}");
         $request=$player_request->getResponse();
         $datas=$request['data'];
+        var_dump($datas);
         foreach ($datas as $data){
             $input=[
                 'PlayerID'=>$data['id'], 
@@ -40,7 +37,16 @@ class player_updates implements ShouldQueue
                 'team'=>$data['team']['full_name'],
                 'position'=>$data['position']
             ];
+            
             PlayerIDs::updateOrCreate($input);
         };
+    }
+
+    public function handle()
+    {
+        for ($i=1; $i<=206; $i++){
+            player_updates::update($i);
+            sleep(5);
+        }
     }
 }

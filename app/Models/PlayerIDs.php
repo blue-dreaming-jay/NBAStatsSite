@@ -11,6 +11,3 @@ class PlayerIDs extends Model{
 
 }
 
-$playerid=new PlayerIDs;
-
-var_dump($playerid);

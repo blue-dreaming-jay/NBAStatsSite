@@ -8,14 +8,14 @@ namespace App\Http\Controllers;
 //         ], 
 // ]
 
-function insert_query($table, $columns, $assoc){
-    $values=[];
-    foreach ($assoc as $asso){
-        $values[]=":{$asso}";
-    }
+// function insert_query($table, $columns, $assoc){
+//     $values=[];
+//     foreach ($assoc as $asso){
+//         $values[]=":{$asso}";
+//     }
 
-    return "INSERT INTO {$table}({implode(',', $columns)}) VALUES({implode(',', $values)})";
-}
+//     return "INSERT INTO {$table}({implode(',', $columns)}) VALUES({implode(',', $values)})";
+// }
 
 function select_query($table, $columns){
     return "SELECT {implode(',', $columns)} FROM {$table}";

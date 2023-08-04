@@ -1,11 +1,16 @@
 <?php
 namespace App\Http\Controllers;
-use App\Http\Controllers\Controller;
+
+//use App\Http\Controllers\Controller;
 use App\Models\PlayerIDs;
-class PlayerControllers extends Controller
+class PlayerController extends Controller
 {
-public function show($id)
+public function show($slug)
 {
-//
+    $player_data=PlayerIDs::where('firstname', explode('-', $slug)[0])->get()->toArray();
+
+    return view('player', $player_data[0]);
+    //dd($player_data[0]);
+    //return $player_data;
 }
 }

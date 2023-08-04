@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\PlayersController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StatsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +22,15 @@ Route::get('/', function () {
 });
 
 Route::get('players', function () {
-    return view('player');
+    return view('players');
 });
+
+Route::get('players', [PlayersController::class, 'fetch_players']);
+
+Route::get('players/{slug}', [PlayerController::class, 'show']);
+
+Route::get('players/{name}/{year}', [StatsController::class, 'show']);
+
+// Route::get('players/Ike-Anigbogu', function () {
+//     return view('player');
+// });
