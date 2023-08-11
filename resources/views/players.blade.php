@@ -14,7 +14,6 @@ Just a test...
             echo "<a href='/players/{$firstname[$i]['firstname']}-{$lastname[$i]['lastname']}'>{$firstname[$i]['firstname']} {$lastname[$i]['lastname']}</a>";
         };
         ?>
-<a href="/players/Ike-Anigbogu">Ike Anigbogu</a>
 
     </p>
 </div>

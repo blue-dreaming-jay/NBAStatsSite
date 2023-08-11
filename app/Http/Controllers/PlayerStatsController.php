@@ -8,17 +8,23 @@ use App\Http\BallerAPIRequest;
 
 use Illuminate\Http\Request;
 
-class StatsController extends Controller
+class PlayerStatsController extends Controller
 {
     //
 
-    public static function average_stats($name, $year){
+    public static function get_id($name){
         $names=explode('-', $name);
         $firstname=$names[0];
         $lastname=$names[1];
         $row=PlayerIDs::where('firstname', $firstname)->where('lastname', $lastname)->get()->toArray();
 
         $id=$row[0]['PlayerID'];
+        return $id;
+    }
+
+    public static function average_stats($name, $year){
+
+        $id=PlayerStatsController::get_id($name);
 
         $request=new BallerAPIRequest("season_averages?season={$year}&player_ids[]={$id}");
 
@@ -30,8 +36,13 @@ class StatsController extends Controller
 
 
      public function show($name, $year){
-        $average_stats=StatsController::average_stats($name, $year);
-        return view('stats', $average_stats);
+        $average_stats=PlayerStatsController::average_stats($name, $year);
+        $player_raw_stats=PlayerRawStats::where('PlayerID', PlayerStatsController::get_id($name))->where('year', $year)->get()->toArray();
+        $data=[
+            'average'=>$average_stats,
+            'raw'=>$player_raw_stats
+        ];
+        return view('stats', $data);
      }
 
  }

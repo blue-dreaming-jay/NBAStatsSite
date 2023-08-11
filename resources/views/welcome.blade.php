@@ -10,6 +10,7 @@ Just a test...
     <p>
         
 <a href="players">players</a>
+<a href="teams">teams</a>
 
     </p>
 </div>

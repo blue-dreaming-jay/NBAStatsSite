@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\PlayersController;
+use App\Http\Controllers\TeamStatsController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StatsController;
+use App\Http\Controllers\PlayerStatsController;
+use App\Http\Controllers\TeamsController;
+use App\Http\Controllers\TeamController;
 
 
 /*
@@ -29,7 +32,13 @@ Route::get('players', [PlayersController::class, 'fetch_players']);
 
 Route::get('players/{slug}', [PlayerController::class, 'show']);
 
-Route::get('players/{name}/{year}', [StatsController::class, 'show']);
+Route::get('players/{name}/{year}', [PlayerStatsController::class, 'show']);
+
+Route::get('teams', [TeamsController::class, 'fetch_teams']);
+
+Route::get('teams/{slug}', [TeamController::class, 'show']);
+
+Route::get('teams/{name}/{year}', [TeamStatsController::class, 'show']);
 
 // Route::get('players/Ike-Anigbogu', function () {
 //     return view('player');

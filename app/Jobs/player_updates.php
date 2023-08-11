@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\PlayerIDs;
 use App\Http\BallerAPIRequest;
+use App\Http\Fetch;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -24,11 +25,10 @@ class player_updates implements ShouldQueue
      * Execute the job.
      */
     public static function update($page){
+        $params="players?page={$page}";
 
-        $player_request=new BallerAPIRequest("players?page={$page}");
-        $request=$player_request->getResponse();
-        $datas=$request['data'];
-        var_dump($datas);
+        $datas=Fetch::getData($page, $params);
+
         foreach ($datas as $data){
             $input=[
                 'PlayerID'=>$data['id'], 

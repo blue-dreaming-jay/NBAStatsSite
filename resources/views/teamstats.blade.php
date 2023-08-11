@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <?php
-    foreach ($average['data'] as $key=>$value){
-        var_dump($key);
-        var_dump($value);
-    }
 
-    dump($raw);
+    dump($average);
     ?>
     <head>
     <div id="chartDiv" style="max-width: 1000px; height: 300px;"></div>
@@ -17,7 +13,7 @@
         window.chartGen=chart_gen;
 
         var data=<?php echo json_encode($raw) ?>;
-        console.log(data[0]['PlayerID']);
+
         const sub_pointer=data.length;
         console.log(sub_pointer);
 
