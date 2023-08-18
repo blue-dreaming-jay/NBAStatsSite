@@ -5,18 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TeamStats extends Model
+class TeamWinsLossesTies extends Model
 {
     use HasFactory;
 
-    protected $table='teamstats';
+    protected $table='team_wins_losses_ties';
     protected $fillable=[
         'TeamID',
-        'Points',
-        'Year',
-        'Wins',
-        'Losses',
-        'Ties'
+        'wins',
+        'losses',
+        'ties',
+        'year'
     ];
 
     public $timestamps=false;

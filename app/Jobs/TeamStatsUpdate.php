@@ -11,6 +11,7 @@ use Illuminate\Queue\SerializesModels;
 use App\Http\BallerAPIRequest;
 use App\Http\Fetch;
 use App\Models\TeamStats;
+use App\Models\PlayerInfo;
 
 class TeamStatsUpdate implements ShouldQueue
 {
@@ -26,10 +27,12 @@ class TeamStatsUpdate implements ShouldQueue
     }
 
 
-    public static function update($page, $season){
+    public static function update_points($page, $season){
         $params="games?seasons[]={$season}&page={$page}";
 
-        $datas=Fetch::getData($page, $params);
+        $datas=Fetch::getData($params);
+
+        $num=0;
 
         foreach ($datas as $data){
             $home=[
@@ -37,16 +40,15 @@ class TeamStatsUpdate implements ShouldQueue
                 'Points'=>$data['home_team_score'],
                 'Year'=>$data['season']
             ];
-            var_dump($home);
-            TeamStats::updateOrCreate($home);
-
             $visitor=[
                 'TeamID'=>$data['visitor_team']['id'],
                 'Points'=>$data['visitor_team_score'],
                 'Year'=>$data['season']
             ];
-
-            TeamStats::updateOrCreate($visitor);
+            TeamStats::create($home);
+            TeamStats::create($visitor);
+            $num+=1;
+            dump($num);
 
 
         }
@@ -60,9 +62,9 @@ class TeamStatsUpdate implements ShouldQueue
     {
         foreach ($this->years as $year){
 
-            $pages=Fetch::pages($year);
+            $pages=Fetch::pages("games?seasons[]={$year}");
             for ($i=1; $i<=$pages; $i++){
-                TeamStatsUpdate::update($i, $year);
+                TeamStatsUpdate::update_points($i, $year);
                 sleep(10);
             };
         };

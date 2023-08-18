@@ -27,7 +27,7 @@ class player_updates implements ShouldQueue
     public static function update($page){
         $params="players?page={$page}";
 
-        $datas=Fetch::getData($page, $params);
+        $datas=Fetch::getData($params);
 
         foreach ($datas as $data){
             $input=[

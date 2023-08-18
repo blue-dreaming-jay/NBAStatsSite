@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <?php
-
-    dump($average);
+    echo "Average points: {$average}" . "<br>";
+    echo "Wins: {$wins_losses['wins']}" . "<br>";
+    echo "Losses: {$wins_losses['losses']}" . "<br>";
+    echo "Ties: {$wins_losses['ties']} " . "<br>";
+    
     ?>
     <head>
     <div id="chartDiv" style="max-width: 1000px; height: 300px;"></div>
     <script src="https://code.jscharting.com/latest/jscharting.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+
 
     <script type="module">
         import {chart_gen} from "/js/stats.js";

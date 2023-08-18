@@ -36,7 +36,7 @@ class PlayerStatsController extends Controller
 
 
      public function show($name, $year){
-        $average_stats=PlayerStatsController::average_stats($name, $year);
+        $average_stats=PlayerStatsController::average_stats($name, $year)['data'][0];
         $player_raw_stats=PlayerRawStats::where('PlayerID', PlayerStatsController::get_id($name))->where('year', $year)->get()->toArray();
         $data=[
             'average'=>$average_stats,

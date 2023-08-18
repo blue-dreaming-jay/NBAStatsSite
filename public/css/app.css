@@ -1,0 +1,9 @@
+body {
+    background-color: lightgrey;
+    color: blue;
+  }
+
+.big-text{
+    font-size: 40px;
+    color: rebeccapurple;
+}

@@ -30,18 +30,39 @@ class PlayerInfo extends Model
         }
     }
 
-    public static function add_year($year){
-        $games=PlayerRawStats::where('year', $year)->get()->toArray();
+    public static function add_year($year, $id){
+        $games=PlayerRawStats::where('year', $year)->where('PlayerID', $id)->get()->toArray();
+
         $id=0;
+        $counter=0;
         foreach ($games as $game){
             if ($id != $game['PlayerID']){
+                $id=$game["PlayerID"];
                 $input=[
                     'PlayerID'=>$game["PlayerID"],
-                    'year_played'=>$year
+                    'year_played'=>$year,
+                    'team'=>PlayerInfo::add_team($id)
                 ];
-                PlayerInfo::updateOrCreate($input);
-                $id=$game["PlayerID"];
+                //dump($input);
+                PlayerInfo::create($input);
+                //dump($id);
+                $counter+=1;
             }
+        }
+        dump($counter);
+        echo ('done');
+    }
+
+    public static function add_team($id){
+        $info=PlayerIDs::where('PlayerID', $id)->get()->toArray();
+        dump($info);
+        return $info[0]['team'];
+
+    }
+
+    public static function add($year, $ids){
+        foreach ($ids as $id){
+            PlayerInfo::add_year($year, $id);
         }
     }
 }

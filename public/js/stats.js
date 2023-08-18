@@ -1,4 +1,3 @@
-
 function make_chart(div, stat, points)
 {
     JSC.Chart(div, {
@@ -18,6 +17,7 @@ export function chart_gen(main_pointer, keys, sub_pointer, data){
         const div=document.createElement("div");
         div.id=`chartDiv${i}`
         document.body.appendChild(div);
+
         const name=keys[i];
         var stats=[];
 

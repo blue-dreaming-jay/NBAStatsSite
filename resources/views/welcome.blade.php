@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Hello World</title>
+<title>NBA Stats Site</title>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 </head>
 
 <body>
-Just a test...
+
 <div>
     <p>
         

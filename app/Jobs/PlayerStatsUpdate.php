@@ -35,7 +35,7 @@ class PlayerStatsUpdate implements ShouldQueue
 
         $params="stats?seasons[]={$season}&page={$page}";
 
-        $datas=Fetch::getData($page, $params);
+        $datas=Fetch::getData($params);
 
         foreach ($datas as $data){
             $input=[
@@ -67,7 +67,7 @@ class PlayerStatsUpdate implements ShouldQueue
     {
         foreach ($this->years as $year){
 
-            $pages=Fetch::pages($year);
+            $pages=Fetch::pages("stats?seasons[]={$year}");
             for ($i=1; $i<=$pages; $i++){
                 PlayerStatsUpdate::update($i, $year);
                 sleep(10);

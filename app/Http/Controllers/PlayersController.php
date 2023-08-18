@@ -7,9 +7,8 @@ use Illuminate\Http\Request;
 class PlayersController extends Controller
 {
     public function fetch_players(){
-        $firstnames=PlayerIDs::select('firstname')->get()->toArray();
-        $lastnames=PlayerIDs::select('lastname')->get()->toArray();
-        $names=['firstname'=>$firstnames, 'lastname'=>$lastnames];
-        return view('players', $names);
+        $names=PlayerIDs::select('firstname', 'lastname')->orderBy('lastname')->get()->toArray();
+        $names_list=['names'=>$names];
+        return view('players', $names_list);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\TeamIDs;
 Use App\Models\TeamStats;
+use App\Models\TeamWinsLossesTies;
 
 use Illuminate\Http\Request;
 
@@ -29,11 +30,14 @@ class TeamStatsController extends Controller
         return $avg;
     }
 
+
     public static function show($name, $year){
         $raw_stats=TeamStats::where('TeamID', TeamStatsController::get_id($name))->where('Year', $year)->get()->toArray();
+        $wins_losses=TeamWinsLossesTies::where('TeamID', TeamStatsController::get_id($name))->where('year', $year)->get()->toArray();
         $data=[
             "average"=>TeamStatsController::avg_stats($name, $year),
-            "raw"=>$raw_stats
+            "raw"=>$raw_stats,
+            "wins_losses"=>$wins_losses[0]
         ];
 
         return view('teamstats', $data);
